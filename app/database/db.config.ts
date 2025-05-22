@@ -11,13 +11,21 @@ const config: { [key: string]: Knex.Config } = {
             database: process.env.PGDATABASE,
             ssl: { rejectUnauthorized: false }
         },
+        // pool: {
+        //     afterCreate: function (conn: any, done: any) {
+        //         done();
+        //     }
+        // },
         migrations: {
-            directory: './migrations',
-            extension: 'ts',
+            directory: 'app/database/migrations',
+            extension: '.ts',
+            loadExtensions: ['.ts'],
+            stub: './app/database/migration.stub.ts'
         },
         seeds: {
-            directory: './seeders',
-            extension: 'ts',
+            directory: 'app/database/seeders',
+            extension: 'seeder.ts',
+            loadExtensions: ['.ts']
         }
     },
     production: {
@@ -28,13 +36,19 @@ const config: { [key: string]: Knex.Config } = {
         },
         pool: { min: 0, max: 10 },
         migrations: {
-            directory: './migrations',
+            directory: 'app/database/migrations',
             extension: 'ts',
+            loadExtensions: ['.ts'],
+            stub: './app/database/migration.stub.ts'
         },
         seeds: {
-            directory: './seeders',
+            directory: 'app/database/seeders',
             extension: 'ts',
+            loadExtensions: ['.ts']
         }
+    },
+    pool: {
+
     }
 };
 
